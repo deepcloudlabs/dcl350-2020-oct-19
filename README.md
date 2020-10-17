@@ -9,5 +9,6 @@ Kurulum Bilgisi:
 Eğitimde lab çalışmaları için gerekli olan çalışma ortamının kurulumu için öncelikle aşağıdaki bağlantıda yer alan sıkıştırılmış dosyayı makinanıza indirmeniz gerekiyor: https://www.deepcloudlabs.com/software/DEVEL-stage-2020a-java.se.and.spring.7z
 
 Sıkıştırılmış dosyayı C:\ dizinine açtıktan sonra dizin yapısı aşağıda gösterildiği şekilde olacaktır:
+![Alt text](folder.png?raw=true "Title")
 
 Diskinizdeki dizin yapısını yukarıdaki ile karşılaştırarak kontrol ediniz. C: sürücünüzün dolu dolması durumunda farklı bir sürücüye sıkıştırılmış dosyayı açabilirsiniz. Ancak bu durumda bir kaç konfigürasyon dosyasında değişiklik yapmanız gerekecektir. Lütfen, eğitim sırasında bu değişikliklerin neler olduğunu eğitmeninize sorunuz. 
