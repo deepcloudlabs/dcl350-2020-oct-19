@@ -7,7 +7,7 @@ public class Employee {
 	private Fullname fullname;
 	private Money salary;
 	private Iban iban;
-	private BirtyYear birthYear;
+	private BirthYear birthYear;
 	private Photo photo;
 	private Department department;
 
@@ -16,13 +16,13 @@ public class Employee {
 	// Ctrl + 1: code generate
 	// Ctrl + Shift + F: Format source
 
-	public Employee(Identity identity, Fullname fullname, BirtyYear birthYear) {
+	public Employee(Identity identity, Fullname fullname, BirthYear birthYear) {
 		this.identity = identity;
 		this.fullname = fullname;
 		this.birthYear = birthYear;
 	}
 
-	public Employee(Identity identity, Fullname fullname, Money salary, Iban iban, BirtyYear birthYear, Photo photo,
+	public Employee(Identity identity, Fullname fullname, Money salary, Iban iban, BirthYear birthYear, Photo photo,
 			Department department) {
 		this.identity = identity;
 		this.fullname = fullname;
@@ -57,11 +57,11 @@ public class Employee {
 		this.iban = iban;
 	}
 
-	public BirtyYear getBirthYear() {
+	public BirthYear getBirthYear() {
 		return birthYear;
 	}
 
-	public void setBirthYear(BirtyYear birthYear) {
+	public void setBirthYear(BirthYear birthYear) {
 		this.birthYear = birthYear;
 	}
 
@@ -85,7 +85,53 @@ public class Employee {
 		return identity;
 	}
 
-	//TODO: Builder pattern
-	
-	
+	// TODO: Builder pattern
+	public static class Builder {
+		private final Identity identity;
+		private Fullname fullname;
+		private Money salary;
+		private Iban iban;
+		private BirthYear birthYear;
+		private Photo photo;
+		private Department department;
+
+		public Builder(Identity identity) {
+			this.identity = identity;
+		}
+
+		public Builder fullname(String first, String last) {
+			this.fullname = new Fullname(first, last);
+			return this;
+		}
+
+		public Builder salary(double value, FiatCurrency currency) {
+			this.salary = Money.valueOf(value, currency);
+			return this;
+		}
+		
+		public Builder iban(String value) {
+			this.iban = Iban.valueOf(value);
+			return this;
+		}
+		
+		public Builder birthYear(int value) {
+			this.birthYear = BirthYear.valueOf(value);
+			return this;
+		}
+		
+		public Builder photo(byte[] values) {
+			this.photo = Photo.valueOf(values);
+			return this;
+		}
+		
+		public Builder department(Department department) {
+			this.department = department;
+			return this;
+		}
+		
+		public Employee build() {
+			return null ; //new Employee(this);
+		}
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.example.hr.core.domain;
 
-public class Department {
-
+// Value Object 
+public enum Department {
+	HR, IT, SALES, FINANCE
 }
