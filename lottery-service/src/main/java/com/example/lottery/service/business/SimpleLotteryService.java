@@ -18,7 +18,7 @@ import com.example.lottery.service.ServiceQuality;
 @Service
 public class SimpleLotteryService implements LotteryService {
 	@Autowired 
-	@ServiceQuality(QualityLevel.SECURE)
+	//@ServiceQuality(QualityLevel.SECURE)
 	private RandomNumberService randomNumberService;
 	private AtomicInteger counter = new AtomicInteger();
 	private int numberOfImps;
