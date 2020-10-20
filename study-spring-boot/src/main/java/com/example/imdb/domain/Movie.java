@@ -7,7 +7,7 @@ import java.util.List;
  * @author Binnur Kurt
  *
  */
-// Aggregate Root -> Entity
+// Aggregate Root -> Entity Root
 public class Movie {
 	private int id;
 	private String title;

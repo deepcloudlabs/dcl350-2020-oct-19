@@ -4,6 +4,7 @@ package com.example.imdb.domain;
  * @author Binnur Kurt
  *
  */
+// Entity
 public class Director {
 	private int id;
 	private String name;
