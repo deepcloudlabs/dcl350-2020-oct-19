@@ -11,11 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.lottery.service.LotteryService;
-import com.example.lottery.service.QualityLevel;
 import com.example.lottery.service.RandomNumberService;
-import com.example.lottery.service.ServiceQuality;
 
 @Service
+@SuppressWarnings("unused")
 public class SimpleLotteryService implements LotteryService {
 	@Autowired 
 	//@ServiceQuality(QualityLevel.SECURE)
