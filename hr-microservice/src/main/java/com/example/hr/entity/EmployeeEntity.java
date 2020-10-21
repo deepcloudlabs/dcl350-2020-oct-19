@@ -12,7 +12,6 @@ import com.example.hr.core.domain.Department;
 import com.example.hr.core.domain.Employee;
 import com.example.hr.core.domain.FiatCurrency;
 import com.example.hr.core.domain.Identity;
-import com.example.hr.dto.FireEmployeeResponse;
 
 @Entity // (1)
 @Table(name = "employees")
@@ -155,7 +154,7 @@ public class EmployeeEntity {
 				+ ", fulltime=" + fulltime + ", department=" + department + "]";
 	}
 
-	public static EmployeeEntity fromEmployee(Employee employee) {
+	public static EmployeeEntity fromEmployee(Employee employee) { // ACL: Anti-Corruption Layer
 		EmployeeEntity entity = new EmployeeEntity();
 		entity.setIdentity(employee.getIdentity().getValue());
 		entity.setFirstName(employee.getFullname().getFirst());
@@ -171,7 +170,7 @@ public class EmployeeEntity {
 		return entity;
 	}
 
-	public Employee toEmployee() {
+	public Employee toEmployee() { // ACL: Anti-Corruption Layer
 		return new Employee.Builder(Identity.valueOf(this.identity)).fullname(firstName, lastName).iban(iban)
 				.salary(salary, currency).birthYear(birthYear).photo(photo).fulltime(fulltime).department(department)
 				.build();
