@@ -109,6 +109,12 @@ public class Employee {
 		return identity;
 	}
 
+	@Override
+	public String toString() {
+		return "Employee [identity=" + identity + ", fullname=" + fullname + ", salary=" + salary + ", iban=" + iban
+				+ ", birthYear=" + birthYear + ", fulltime=" + fulltime + ", department=" + department + "]";
+	}
+
 	public static class Builder {
 		private final Identity identity;
 		private Fullname fullname;

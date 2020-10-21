@@ -25,8 +25,7 @@ public class EmployeeRepositoryAdapter implements EmployeeRepository {
 	@Override
 	@Transactional
 	public void create(Employee employee) {
-		// TODO: convert Employee to EmployeeEntity
-		EmployeeEntity ee = null;
+		EmployeeEntity ee = EmployeeEntity.fromEmployee(employee);
 		empRepo.save(ee);
 	}
 
@@ -38,8 +37,7 @@ public class EmployeeRepositoryAdapter implements EmployeeRepository {
 			throw new IllegalArgumentException("Cannot find employee to delete.");
 		EmployeeEntity entity = employeeEntity.get();
 		empRepo.delete(entity);
-		//TODO: Convert EmployeeEntity to Employee
-		Employee employee = null;
+		Employee employee = entity.toEmployee();
 		return employee;
 	}
 

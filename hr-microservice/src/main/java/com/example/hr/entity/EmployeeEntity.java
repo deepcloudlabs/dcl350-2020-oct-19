@@ -9,7 +9,10 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.example.hr.core.domain.Department;
+import com.example.hr.core.domain.Employee;
 import com.example.hr.core.domain.FiatCurrency;
+import com.example.hr.core.domain.Identity;
+import com.example.hr.dto.FireEmployeeResponse;
 
 @Entity // (1)
 @Table(name = "employees")
@@ -150,6 +153,28 @@ public class EmployeeEntity {
 		return "EmployeeEntity [identity=" + identity + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", salary=" + salary + ", currency=" + currency + ", iban=" + iban + ", birthYear=" + birthYear
 				+ ", fulltime=" + fulltime + ", department=" + department + "]";
+	}
+
+	public static EmployeeEntity fromEmployee(Employee employee) {
+		EmployeeEntity entity = new EmployeeEntity();
+		entity.setIdentity(employee.getIdentity().getValue());
+		entity.setFirstName(employee.getFullname().getFirst());
+		entity.setLastName(employee.getFullname().getLast());
+		entity.setIban(employee.getIban().getValue());
+		var employeeSalary = employee.getSalary();
+		entity.setSalary(employeeSalary.getValue());
+		entity.setCurrency(employeeSalary.getCurrency());
+		entity.setDepartment(employee.getDepartment());
+		entity.setFulltime(employee.isFulltime());
+		entity.setBirthYear(employee.getBirthYear().getValue());
+		entity.setPhoto(employee.getPhoto().getValues());
+		return entity;
+	}
+
+	public Employee toEmployee() {
+		return new Employee.Builder(Identity.valueOf(this.identity)).fullname(firstName, lastName).iban(iban)
+				.salary(salary, currency).birthYear(birthYear).photo(photo).fulltime(fulltime).department(department)
+				.build();
 	}
 
 }

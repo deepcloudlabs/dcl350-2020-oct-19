@@ -26,6 +26,7 @@ public class SimpleHrApplication implements HrApplication {
 		var identity = employee.getIdentity();
 		if (employeeRepository.existsByIdentity(identity))
 			throw new IllegalArgumentException("Employee already exists");
+		System.err.println(employee);
 		employeeRepository.create(employee);
 		eventPublisher.publishEvent(new EmployeeHiredEvent("employees",employee));
 		return true;
