@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,13 @@ public class SimpleCrmService implements CrmService {
 		if (customerRepository.existsById(identity))
 			throw new IllegalArgumentException("Customer already exists.");
 		Customer customer = modelMapper.map(request, Customer.class);
+		System.err.println("Before save...");
 		customerRepository.save(customer);
+		customerRepository.flush();
+		System.err.println("After save...");
+		try {
+			TimeUnit.SECONDS.sleep(10);
+		} catch (InterruptedException e) {}
 		return new AddCustomerResponse("ok");
 	}
 
@@ -63,7 +70,7 @@ public class SimpleCrmService implements CrmService {
 		var cust = managedCustomer.get();
 		cust.setEmail(customer.getEmail());
 		cust.setSms(customer.getSms());
-		cust.setAddresses(customer.getAddresses());
+		//cust.setAddresses(customer.getAddresses());
 		cust.setFullname(customer.getFullname());
 		cust.setPhoto(customer.getPhoto());
 		return new UpdateCustomerResponse("ok");

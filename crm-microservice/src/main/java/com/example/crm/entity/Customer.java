@@ -5,13 +5,17 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "customers")
+@DynamicUpdate
 public class Customer {
 	@Id
 	private String identity;
@@ -21,7 +25,7 @@ public class Customer {
 	@Lob
 	@Column(columnDefinition = "longblob")
 	private byte[] photo;
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.EAGER)
 	private List<Address> addresses;
 
 	public Customer() {
