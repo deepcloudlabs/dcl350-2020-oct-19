@@ -51,14 +51,19 @@ public class CrmController {
     	return crmService.create(request);
     }
     
+    // PUT http://localhost:6200/crm/api/v1/customers/11111111110
     @PutMapping("{identity}")
-    public UpdateCustomerResponse updateCustomer(@RequestBody UpdateCustomerRequest request) {
-    	return crmService.update(request);
+    public UpdateCustomerResponse updateCustomer(
+    		@PathVariable String identity,
+    		@RequestBody UpdateCustomerRequest request) {
+    	return crmService.update(identity, request);
     }
     
     @PatchMapping("{identity}")
-    public UpdateCustomerResponse updateCustomer(@RequestBody Map<String,Object> request) {
-    	return crmService.patch(request);    	
+    public UpdateCustomerResponse updateCustomer(
+    		@PathVariable String identity,
+    		@RequestBody Map<String,Object> request) {
+    	return crmService.patch(identity, request);    	
     }
     
     @DeleteMapping("{identity}")

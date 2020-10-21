@@ -17,9 +17,9 @@ public interface CrmService {
 
 	AddCustomerResponse create(AddCustomerRequest request);
 
-	UpdateCustomerResponse update(UpdateCustomerRequest request);
+	UpdateCustomerResponse update(String identity, UpdateCustomerRequest request);
 
-	UpdateCustomerResponse patch(Map<String, Object> request);
+	UpdateCustomerResponse patch(String identity, Map<String, Object> request);
 
 	CustomerResponse delete(String identity);
 
