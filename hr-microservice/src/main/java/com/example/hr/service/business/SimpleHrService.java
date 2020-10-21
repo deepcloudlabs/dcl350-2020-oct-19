@@ -1,5 +1,7 @@
 package com.example.hr.service.business;
 
+import static com.example.hr.dto.FireEmployeeResponse.fromEmployee;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -22,10 +24,9 @@ public class SimpleHrService implements HrService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 	public HireEmployeeResponse hireEmployee(HireEmployeeRequest request) {
-		Employee employee = null;
+		Employee employee = request.toEmployee();
 		hrApplication.hireEmployee(employee);
-		//TODO: Convert request to employee
-		return new HireEmployeeResponse();
+		return new HireEmployeeResponse("ok", request.getIdentity());
 	}
 
 	@Override
@@ -34,8 +35,7 @@ public class SimpleHrService implements HrService {
 		var employee = hrApplication.fireEmployee(Identity.valueOf(identity));
 		if (employee.isEmpty())
 			throw new IllegalArgumentException("Cannot find employee to fire.");
-		//TODO: Convert employee to FireEmployeeResponse
-		return new FireEmployeeResponse();
+		return fromEmployee(employee.get());
 	}
 
 }

@@ -29,7 +29,7 @@ public class HrController {
 	}
 
 	@DeleteMapping("{identity}")
-	public FireEmployeeResponse hireEmployee(@PathVariable String identity) {
+	public FireEmployeeResponse fireEmployee(@PathVariable String identity) {
 		return hrService.fireEmployee(identity);
 	}
 }
