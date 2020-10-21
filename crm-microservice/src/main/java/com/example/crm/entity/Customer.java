@@ -2,6 +2,7 @@ package com.example.crm.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Customer {
 	@Lob
 	@Column(columnDefinition = "longblob")
 	private byte[] photo;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	private List<Address> addresses;
 
 	public Customer() {
