@@ -5,7 +5,6 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,23 +23,21 @@ import com.example.crm.service.CrmService;
 
 @Service
 public class SimpleCrmService implements CrmService {
-    @Autowired private CustomerRepository customerRepository;
-    @Autowired private ModelMapper modelMapper;
-    
+	@Autowired
+	private CustomerRepository customerRepository;
+	@Autowired
+	private ModelMapper modelMapper;
+
 	@Override
 	public CustomerResponse findById(String identity) {
-		return customerRepository.findById(identity)
-				     .map(this::convertCustomerToCustomerReponse )
-				     .orElseThrow(() -> new IllegalArgumentException("Cannot find customer"));
+		return customerRepository.findById(identity).map(this::convertCustomerToCustomerReponse)
+				.orElseThrow(() -> new IllegalArgumentException("Cannot find customer"));
 	}
 
 	@Override
 	public List<CustomerResponse> findByPage(int page, int size) {
-		return customerRepository.findAll(PageRequest.of(page, size))
-				.getContent()
-				.stream()
-				.map(this::convertCustomerToCustomerReponse)
-				.collect(toList());
+		return customerRepository.findAll(PageRequest.of(page, size)).getContent().stream()
+				.map(this::convertCustomerToCustomerReponse).collect(toList());
 	}
 
 	@Override
@@ -67,7 +64,7 @@ public class SimpleCrmService implements CrmService {
 		var cust = managedCustomer.get();
 		cust.setEmail(customer.getEmail());
 		cust.setSms(customer.getSms());
-		//cust.setAddresses(customer.getAddresses());
+		// cust.setAddresses(customer.getAddresses());
 		cust.setFullname(customer.getFullname());
 		cust.setPhoto(customer.getPhoto());
 		return new UpdateCustomerResponse("ok");
@@ -81,7 +78,7 @@ public class SimpleCrmService implements CrmService {
 			throw new IllegalArgumentException("Customer does not exist to patch.");
 		var cust = managedCustomer.get();
 		var clazz = Customer.class;
-         request.forEach( (key,value) -> {
+		request.forEach((key, value) -> {
 			try {
 				var field = clazz.getDeclaredField(key);
 				if (Objects.nonNull(field)) {
@@ -90,9 +87,9 @@ public class SimpleCrmService implements CrmService {
 					field.setAccessible(false);
 				}
 			} catch (Exception e) {
-				System.err.println("Error has occured: "+e.getMessage());
+				System.err.println("Error has occured: " + e.getMessage());
 			}
-         });		
+		});
 		return new UpdateCustomerResponse("ok");
 	}
 
@@ -106,10 +103,9 @@ public class SimpleCrmService implements CrmService {
 		customerRepository.delete(cust);
 		return modelMapper.map(cust, CustomerResponse.class);
 	}
-	
-    private CustomerResponse convertCustomerToCustomerReponse(Customer customer) {
-    	return modelMapper.map(customer,CustomerResponse.class);
-    }
 
-	
+	private CustomerResponse convertCustomerToCustomerReponse(Customer customer) {
+		return modelMapper.map(customer, CustomerResponse.class);
+	}
+
 }
