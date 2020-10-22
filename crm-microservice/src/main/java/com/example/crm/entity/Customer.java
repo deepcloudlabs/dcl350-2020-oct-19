@@ -10,17 +10,26 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.example.validation.Email;
+import com.example.validation.TcKimlikNo;
 
 @Entity
 @Table(name = "customers")
 @DynamicUpdate
 public class Customer {
 	@Id
+	@TcKimlikNo
 	private String identity;
+	@Size(min=6)
 	private String fullname;
+	@Pattern(regexp="^\\d+$")
 	private String sms;
+	@Email
 	private String email;
 	@Lob
 	@Column(columnDefinition = "longblob")

@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 	 @Pattern(regexp="^.*\\d+.*$",message="{validation.strongPassword2}"),
      @Pattern(regexp="^.*[-_]+.*$",message="{validation.strongPassword3}")
 })
-@Size(max=6)
+@Size(min=6)
 @Constraint(validatedBy = {})
 public @interface StrongPassword {
 	   String message() default "{validation.strongPassword1}";

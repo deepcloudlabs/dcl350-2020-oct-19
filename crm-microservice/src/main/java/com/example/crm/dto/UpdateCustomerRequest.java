@@ -2,16 +2,25 @@ package com.example.crm.dto;
 
 import java.util.List;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.example.crm.entity.Address;
+import com.example.validation.Email;
+import com.example.validation.TcKimlikNo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UpdateCustomerRequest {
 	@JsonProperty("tc_kimlik_no")
+	@TcKimlikNo
 	private String identity;
 	@JsonProperty("ad_soyad")
+	@Size(min=6)
 	private String fullname;
+	@Pattern(regexp="^\\d+$")
 	private String sms;
 	@JsonProperty("eposta")
+	@Email
 	private String email;
 	private String photo;
 	private List<Address> addresses;
