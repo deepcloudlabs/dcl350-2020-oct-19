@@ -33,6 +33,6 @@ public class StudyClientSideLoadBalancing1 {
 		ServiceInstance server = servers.get(index );
 		String formattedUrl = String.format(URL,server .getHost(),server.getPort());
 		var response = restTemplate.getForEntity(formattedUrl, String.class).getBody();
-		System.err.println(formattedUrl+": "+response);
+		System.err.println(formattedUrl+" (#1) : "+response);
 	}
 }
