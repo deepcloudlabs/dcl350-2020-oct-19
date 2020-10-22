@@ -3,6 +3,7 @@ package com.example.crm;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+// -Duser.language=tr -Duser.country=UK
 @SpringBootApplication
 public class CrmMicroserviceApplication {
 
