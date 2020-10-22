@@ -16,7 +16,7 @@ public class MarketApiWebsocketClient {
 		HttpClient.newHttpClient()
 		          .newWebSocketBuilder()
                   .buildAsync(URI.create(URL ), listener );
-		TimeUnit.MINUTES.sleep(1);
+		TimeUnit.DAYS.sleep(365);
 	}
 
 }
