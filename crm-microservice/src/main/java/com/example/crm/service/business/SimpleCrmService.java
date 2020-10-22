@@ -54,9 +54,6 @@ public class SimpleCrmService implements CrmService {
 		customerRepository.save(customer);
 		customerRepository.flush();
 		System.err.println("After save...");
-		try {
-			TimeUnit.SECONDS.sleep(10);
-		} catch (InterruptedException e) {}
 		return new AddCustomerResponse("ok");
 	}
 
