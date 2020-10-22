@@ -25,16 +25,16 @@ public class Customer {
 	@Id
 	@TcKimlikNo
 	private String identity;
-	@Size(min=6)
+	@Size(min = 6)
 	private String fullname;
-	@Pattern(regexp="^\\d+$")
+	@Pattern(regexp = "^\\d+$")
 	private String sms;
 	@Email
 	private String email;
 	@Lob
 	@Column(columnDefinition = "longblob")
 	private byte[] photo;
-	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Address> addresses;
 
 	public Customer() {
@@ -86,6 +86,31 @@ public class Customer {
 
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((identity == null) ? 0 : identity.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (identity == null) {
+			if (other.identity != null)
+				return false;
+		} else if (!identity.equals(other.identity))
+			return false;
+		return true;
 	}
 
 	@Override
