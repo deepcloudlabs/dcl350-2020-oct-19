@@ -64,9 +64,11 @@ public class SimpleCrmService implements CrmService {
 		var cust = managedCustomer.get();
 		cust.setEmail(customer.getEmail());
 		cust.setSms(customer.getSms());
-		// cust.setAddresses(customer.getAddresses());
+		cust.getAddresses().clear();
+		cust.getAddresses().addAll(customer.getAddresses());
 		cust.setFullname(customer.getFullname());
 		cust.setPhoto(customer.getPhoto());
+		customerRepository.save(cust);
 		return new UpdateCustomerResponse("ok");
 	}
 
