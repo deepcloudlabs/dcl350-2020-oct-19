@@ -28,7 +28,8 @@ public class ReactiveBinanceWebClient {
 		        .runOn(Schedulers.elastic())
 		        .flatMap(this::getTicker)
 		        .ordered(Comparator.comparing(Ticker::getSymbol))
-		        .subscribe(System.err::println);		
+		        //.subscribe(System.err::println);		
+		        .subscribe(ticker -> System.err.println(ticker));		
 		System.err.println(String.format("Calling Binance Rest Api %d times.✔",BINANCE_URLS.size()));
 
 	}
