@@ -24,10 +24,6 @@ public class LotteryController {
 	@GetMapping(params = "column")
 	public List<List<Integer>> getLotteryNumbers(
 			@RequestParam(required = false, defaultValue = "10") int column){
-		int x=3, y = 5;
-		int z = x + y;
-		x++;
-		// z? UI -> Angular -> Reactive, React -> code -> Reactive, Vue -> Reactive
 		return lotteryService.draw(column);
 	}
 }
