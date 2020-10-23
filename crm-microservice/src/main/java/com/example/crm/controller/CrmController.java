@@ -29,8 +29,6 @@ import com.example.crm.dto.UpdateCustomerResponse;
 import com.example.crm.service.CrmService;
 import com.example.validation.TcKimlikNo;
 
-import io.swagger.annotations.Api;
-
 // REST over HTTP -> Capabilities: Http Methods: {GET, POST, PUT, PATCH, DELETE}, OPTION, HEAD
 // Resource -> Model -> Customer (Entity Root -> Aggregate) -> URL
 @RestController                        // application.properties ==|               ==|  @RequestMapping
