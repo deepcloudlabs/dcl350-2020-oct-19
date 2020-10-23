@@ -23,6 +23,7 @@ public class StudyClientSideLoadBalancing1 {
 	
 	@PostConstruct
 	public void getInstances() {
+		// application.properties: spring.application.name=lottery
 		servers = discoveryClient.getInstances("lottery");        
 	}
 	
